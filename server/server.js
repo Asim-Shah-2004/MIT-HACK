@@ -5,8 +5,8 @@ import "dotenv/config"
 import logger from './utils/logger.js';
 import { connectDB } from "./services/index.js"
 
-const app = express();
 const PORT = process.env.PORT;
+const app = express();
 
 connectDB();
 

@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import "dotenv/config"
+import logger from './utils/logger.js';
 import { connectDB } from "./services/index.js"
 
 const app = express();
@@ -18,5 +19,5 @@ app.get('/', (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    logger.info(`Server is running on port ${PORT}`);
 });

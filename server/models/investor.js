@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const SMESchema = new Schema(
+const InvestorSchema = new Schema(
   {
     fullName: {
       type: String,
@@ -10,13 +10,15 @@ const SMESchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
       required: true,
     },
-    phoneNumber: {
+    role: {
       type: String,
+      enum: ['angel', 'vc', 'incubator'],
       required: true,
     },
     location: {
@@ -34,37 +36,29 @@ const SMESchema = new Schema(
       },
     },
     profilePic: {
-      data: Buffer,
-      contentType: String,
-    },
-    businessState: {
-      type: String,
+      type: String, 
       required: true,
     },
-    businessType: {
-      type: String,
-      required: true,
-    },
-    challengesFaced: {
+    interestedIndustries: {
       type: [String],
       default: [],
     },
-    goalsAndAspirations: {
-      type: [String],
-      default: [],
+    amountLookingToInvest: {
+      type: Number,
+      required: true,
     },
-    chats: [
-      {
-        personName: {
-          type: String,
-          required: true,
-        },
-        chatId: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    investmentType: {
+      type: String,
+      required: true,
+    },
+    interestedInRuralBusiness: {
+      type: Boolean,
+      required: true,
+    },
+    engagementType: {
+      type: String,
+      required: true,
+    },
     proposals: [
       {
         proposalId: {
@@ -86,10 +80,22 @@ const SMESchema = new Schema(
         },
       },
     ],
+    chats: [
+      {
+        personName: {
+          type: String,
+          required: true,
+        },
+        chatId: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
-  { collection: "SME" }
+  { collection: 'Investor' }
 );
 
-const SME = mongoose.model("SME", SMESchema);
+const Investor = mongoose.model('Investor', InvestorSchema);
 
-export default SME;
+export default Investor;

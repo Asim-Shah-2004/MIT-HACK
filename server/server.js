@@ -5,6 +5,7 @@ import "dotenv/config"
 import logger from './utils/logger.js';
 import { connectDB } from "./services/index.js"
 import { registerRouter } from './routers/index.js';
+import { proposal,chatRoom } from './middlewares/index.js';
 
 const PORT = process.env.PORT;
 const app = express();
@@ -13,6 +14,9 @@ connectDB();
 
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+
+app.use(proposal)
+app.use(chatRoom)
 
 app.use('/register', registerRouter);
 

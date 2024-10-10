@@ -1,16 +1,9 @@
-import http from 'http';
-import express from 'express';
-import { Server } from "socket.io";
 import crypto from 'crypto';
-import { SME, ChatRoom,Investor } from "../../models/index.js";
+import { SME, ChatRoom,Investor } from "../models/index.js";
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server)
-
-const proposal = async () => {
+const proposal = async (io) => {
     io.on('connection', (socket) => {
-
+                                                            //proposal details is json can be anything
         socket.on('sendProposal', async ({ senderId, recipientId, userType, proposalDetails }) => {
             try {
                 let sender;

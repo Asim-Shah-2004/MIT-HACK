@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'recommender'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,14 @@ WSGI_APPLICATION = 'MIT_HACK.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'mithack',  # Replace with your database name
+        'ENFORCE_SCHEMA': False,  # Set to True if you want to enforce schema
+        'CLIENT': {
+            'host': 'mongodb://localhost:27017/mithack',  # Replace with your MongoDB connection string
+            # For MongoDB Atlas, use:
+            # 'host': 'mongodb+srv://username:password@cluster.mongodb.net/your_database_name?retryWrites=true&w=majority',
+        }
     }
 }
 

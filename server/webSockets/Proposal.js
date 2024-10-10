@@ -91,6 +91,40 @@ const proposal = async (io) => {
             }
         });
 
+        socket.on('rejectProposal', async ({ userId, proposalId, userType }) => {
+            try {
+                let user;
+                if (userType === 'sme') {
+                    user = await SME.findById(userId);
+                } else if (userType === 'investor') {
+                    user = await Investor.findById(userId);
+                }
+        
+                if (!user) {
+                    socket.emit('error', { message: 'User not found' });
+                    return;
+                }
+        
+                const proposal = user.proposals.find(
+                    (p) => p.proposalId === proposalId
+                );
+        
+                if (!proposal || proposal.status !== 'pending') {
+                    socket.emit('error', { message: 'Invalid proposal or already processed' });
+                    return;
+                }
+        
+                user.proposals.pull({ proposalId: proposalId });
+                await user.save();
+        
+                socket.emit('proposalRejected', { message: 'Proposal has been rejected and removed.' });
+                
+            } catch (error) {
+                socket.emit('error', { message: 'Failed to reject and remove proposal' });
+            }
+        });
+        
+
         socket.on('disconnect', () => {
         });
     });

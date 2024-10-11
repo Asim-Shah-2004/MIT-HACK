@@ -1,4 +1,4 @@
-import {SME,Investor,Post} from "../../models/index.js"
+import {SME,Investor,Post,Mentor} from "../../models/index.js"
 import crypto from 'crypto';
 
 const addPost = async (req, res) => {
@@ -22,6 +22,8 @@ const addPost = async (req, res) => {
       user = await SME.findById(userId);
     } else if (userType === 'investor') {
       user = await Investor.findById(userId);
+    }else if(userType === 'mentor'){
+        user = await Mentor.findById(userId);
     }
 
     if (!user) {

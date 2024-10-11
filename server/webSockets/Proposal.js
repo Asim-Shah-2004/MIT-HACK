@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { SME, ChatRoom,Investor } from "../models/index.js";
+import { SME, ChatRoom,Investor,Mentor } from "../models/index.js";
 
 const proposal = async (io) => {
     io.on('connection', (socket) => {
@@ -11,10 +11,13 @@ const proposal = async (io) => {
                 
                 if (userType === 'sme') {
                     sender = await SME.findById(senderId);
-                    recipient = await SME.findById(recipientId) || await Investor.findById(recipientId);
+                    recipient = await SME.findById(recipientId) || await Investor.findById(recipientId) || await Mentor.findById(recipientId);
                 } else if (userType === 'investor') {
                     sender = await Investor.findById(senderId);
-                    recipient = await SME.findById(recipientId) || await Investor.findById(recipientId);
+                    recipient = await SME.findById(recipientId) || await Investor.findById(recipientId) || await Mentor.findById(recipientId);
+                }else if(userType === 'mentor'){
+                    sender = await Mentor.findById(userId);
+                    recipient = await SME.findById(recipientId) || await Investor.findById(recipientId) || await Mentor.findById(recipientId);
                 }
 
                 if (!sender || !recipient) {
@@ -49,6 +52,8 @@ const proposal = async (io) => {
                     user = await SME.findById(userId);
                 } else if (userType === 'investor') {
                     user = await Investor.findById(userId);
+                }else if(userType === 'mentor'){
+                    user = await Mentor.findById(userId);
                 }
 
                 if (!user) {
@@ -98,6 +103,8 @@ const proposal = async (io) => {
                     user = await SME.findById(userId);
                 } else if (userType === 'investor') {
                     user = await Investor.findById(userId);
+                }else if(userType === 'mentor'){
+                    user = await Mentor.findById(userId);
                 }
         
                 if (!user) {

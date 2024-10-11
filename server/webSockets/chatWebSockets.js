@@ -12,6 +12,8 @@ const chatRoom = async (io) => {
                     sender = await SME.findById(senderId);
                 } else if (userType === 'investor') {
                     sender = await Investor.findById(senderId);
+                }else if(userType === 'mentor'){
+                    user = await Mentor.findById(userId);
                 }
 
                 if (!sender) {

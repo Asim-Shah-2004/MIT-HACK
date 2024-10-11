@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const SMESchema = new Schema(
@@ -22,15 +22,15 @@ const SMESchema = new Schema(
     location: {
       country: {
         type: String,
-        required: true,
+        required: false,
       },
       state: {
         type: String,
-        required: true,
+        required: false,
       },
       city: {
         type: String,
-        required: true,
+        required: false,
       },
     },
     profilePic: {
@@ -39,11 +39,11 @@ const SMESchema = new Schema(
     },
     businessState: {
       type: String,
-      required: true,
+      required: false,
     },
     businessType: {
       type: String,
-      required: true,
+      required: false,
     },
     challengesFaced: {
       type: [String],
@@ -57,39 +57,31 @@ const SMESchema = new Schema(
       {
         personName: {
           type: String,
-          required: true,
+          required: false,
         },
         chatId: {
           type: String,
-          required: true,
+          required: false,
         },
       },
     ],
     proposals: [
       {
-        proposalId: {
-          type: String,
-          required: true,
-        },
-        status: {
-          type: String,
-          enum: ['pending', 'accepted', 'rejected'],
-          default: 'pending',
-        },
-        senderEmail: {
-          type: String,
-          required: true,
-        },
-        senderName: {
-          type: String,
-          required: true,
-        },
+        proposalId: { type: String, required: false },
+        status: { type: String, default: 'pending' },
+        senderEmail: { type: String, required: false },
+        senderName: { type: String, required: false },
+      },
+    ],
+    posts: [
+      {
+        postId: { type: String, required: false },
       },
     ],
   },
-  { collection: "SME" }
+  { collection: 'SME' }
 );
 
-const SME = mongoose.model("SME", SMESchema);
+const SME = mongoose.model('SME', SMESchema);
 
 export default SME;

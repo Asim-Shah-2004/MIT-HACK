@@ -1,12 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import "dotenv/config"
+import "dotenv/config";
 import logger from './utils/logger.js';
 import http from 'http';
 
 import {Server} from 'socket.io';
-import { connectDB } from "./services/index.js"
+import { connectDB } from "./services/index.js";
 import { registerRouter } from './routers/index.js';
 import { proposal,chatRoom } from './webSockets/index.js';
 

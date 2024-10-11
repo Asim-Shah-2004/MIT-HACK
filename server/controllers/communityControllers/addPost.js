@@ -1,8 +1,8 @@
 import {SME,Investor,Post} from "../../models/index.js"
 import crypto from 'crypto';
 
-export const addPost = async (req, res) => {
-  const { userId, userType, content } = req.body;
+const addPost = async (req, res) => {
+  const { userId, userType, content , image } = req.body;
 
   try {
     const postId = crypto.randomBytes(16).toString('hex');
@@ -11,6 +11,8 @@ export const addPost = async (req, res) => {
       postId,
       likes: 0,
       comments: [],
+      image,
+      content
     });
 
     await newPost.save();
@@ -34,3 +36,5 @@ export const addPost = async (req, res) => {
     res.status(500).json({ message: 'Error creating post' });
   }
 };
+
+export default addPost

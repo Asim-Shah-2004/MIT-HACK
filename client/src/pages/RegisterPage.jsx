@@ -65,27 +65,42 @@ export default function RegisterPage() {
       setValue('email', email)
       setValue('name', name)
       
-      const apiResponse = await fetch('http://localhost:3000/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          name,
-          userType,
-          registrationMethod: 'google',
-          idToken: credentialResponse.credential,
-        }),
-      })
+      // const apiResponse = await fetch('http://localhost:3000/register', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     email,
+      //     name,
+      //     userType,
+      //     registrationMethod: 'google',
+      //     idToken: credentialResponse.credential,
+      //   }),
+      // })
 
-      if (!apiResponse.ok) {
+      // if (!apiResponse.ok) {
+      //   throw new Error('Google registration failed')
+      // }
+
+      const body  = JSON.stringify({
+        email,
+        name,
+        userType,
+        registrationMethod: 'google',
+        idToken: credentialResponse.credential,
+      });
+
+      console.log(body);
+      if (!body) {
         throw new Error('Google registration failed')
       }
+      else {
 
       toast.success("Google registration successful", {
         description: `Welcome, ${name}!`,
       })
+    }
     } catch (error) {
       toast.error("Google registration failed", {
         description: error.message,
@@ -120,8 +135,11 @@ export default function RegisterPage() {
     }
   }
 
+  const google_id = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  console.log(google_id); 
+
   return (
-    <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+    <GoogleOAuthProvider clientId={google_id}>
       <Toaster position="top-right" richColors />
 
       <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center p-4">

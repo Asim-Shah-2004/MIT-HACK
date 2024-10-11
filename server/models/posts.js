@@ -19,6 +19,14 @@ const PostSchema = new Schema(
         createdAt: { type: Date, default: Date.now },
       },
     ],
+    image: {
+      data: Buffer,
+      contentType: String,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
   },
   { collection: 'Post', timestamps: true }
 );

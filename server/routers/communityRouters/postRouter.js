@@ -1,8 +1,9 @@
 import express from 'express'
-import {addPost} from '../../controllers/index.js'
+import {addPost,addComment} from '../../controllers/index.js'
 
 const postRouter = express.Router()
-postRouter.post('/add', addPost)
 
+postRouter.post('/add', addPost)
+postRouter.post('/comment',addComment)
 
 export default postRouter

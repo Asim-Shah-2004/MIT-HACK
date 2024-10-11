@@ -23,6 +23,11 @@ app.use(morgan('dev'));
 proposal(io)
 chatRoom(io)
 
+/**
+ * VVIP Remember to send ID created anywhere to frontend as it will be used
+ * to identify things such as posts proposals etc
+ */
+
 app.use('/register', registerRouter);
 app.use('/post',postRouter)
 

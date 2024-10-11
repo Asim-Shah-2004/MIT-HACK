@@ -130,8 +130,7 @@ export default function LandingPage() {
                 <img
                   src= {"https://contiguglia.com/wp-content/uploads/2019/06/7CD05707-3C05-4A36-AF95-8DACE7380EFD-1080x675.jpeg"}
                   alt="Hero Image"
-                  layout="fill"
-                  objectFit="cover"
+                  style={{ width: '100%', height: '100%', objectFit: "cover" }}
                   className="rounded-lg shadow-2xl"
                 />
               </motion.div>
@@ -179,8 +178,7 @@ export default function LandingPage() {
                 <img
                   src="/placeholder.svg"
                   alt="Product Interface"
-                  layout="fill"
-                  objectFit="cover"
+                  style={{ width: '100%', height: '100%', objectFit: "cover" }}
                   className="rounded-lg shadow-xl"
                 />
               </motion.div>
@@ -253,8 +251,7 @@ export default function LandingPage() {
                 <img
                   src="/placeholder.svg"
                   alt="AI Integration"
-                  layout="fill"
-                  objectFit="cover"
+                  style={{ width: '100%', height: '100%', objectFit: "cover" }}
                   className="rounded-lg shadow-xl"
                 />
               </motion.div>
@@ -295,7 +292,7 @@ export default function LandingPage() {
             >
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">What Our Customers Say</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Don't just take our word for it. Here's what industry leaders have to say about our platform.
+                Don&apos;t just take our word for it. Here&apos;s what industry leaders have to say about our platform.
               </p>
             </motion.div>
             <motion.div
@@ -325,7 +322,7 @@ export default function LandingPage() {
                 <motion.div key={index} variants={fadeIn}>
                   <Card>
                     <CardContent className="p-6">
-                      <p className="text-lg mb-4">"{testimonial.content}"</p>
+                      <p className="text-lg mb-4">&quot;{testimonial.content}&quot;</p>
                       <div className="flex items-center space-x-4">
                         <div className="rounded-full bg-muted h-12 w-12"></div>
                         <div>
@@ -385,8 +382,7 @@ export default function LandingPage() {
                 <img
                   src="/placeholder.svg"
                   alt="Integration Showcase"
-                  layout="fill"
-                  objectFit="cover"
+                  style={{ width: '100%', height: '100%', objectFit: "cover" }}
                   className="rounded-lg shadow-xl"
                 />
               </motion.div>

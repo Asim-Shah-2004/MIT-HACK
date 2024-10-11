@@ -5,14 +5,17 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, CheckCircle, Menu, X, Github, Twitter, Linkedin, BarChart, Users, Zap } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import OdooComp from '@/components/OdooComp'
+import { Navigate } from 'react-router-dom'
 
 
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { scrollYProgress } = useScroll()
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +63,9 @@ export default function LandingPage() {
             </nav>
             <div className="hidden md:flex items-center space-x-4">
               <Button variant="outline">Log in</Button>
-              <Button>Sign up</Button>
+              <Button
+                onClick={() => navigate('/register')}
+              >Sign up</Button>
             </div>
             <div className="md:hidden">
               <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>

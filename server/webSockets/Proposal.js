@@ -1,16 +1,9 @@
-import http from 'http';
-import express from 'express';
-import { Server } from "socket.io";
 import crypto from 'crypto';
-import { SME, ChatRoom,Investor } from "../../models/index.js";
+import { SME, ChatRoom,Investor } from "../models/index.js";
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server)
-
-const proposal = async () => {
+const proposal = async (io) => {
     io.on('connection', (socket) => {
-
+                                                            //proposal details is json can be anything
         socket.on('sendProposal', async ({ senderId, recipientId, userType, proposalDetails }) => {
             try {
                 let sender;
@@ -97,6 +90,40 @@ const proposal = async () => {
                 socket.emit('error', { message: 'Failed to accept proposal and create chat room' });
             }
         });
+
+        socket.on('rejectProposal', async ({ userId, proposalId, userType }) => {
+            try {
+                let user;
+                if (userType === 'sme') {
+                    user = await SME.findById(userId);
+                } else if (userType === 'investor') {
+                    user = await Investor.findById(userId);
+                }
+        
+                if (!user) {
+                    socket.emit('error', { message: 'User not found' });
+                    return;
+                }
+        
+                const proposal = user.proposals.find(
+                    (p) => p.proposalId === proposalId
+                );
+        
+                if (!proposal || proposal.status !== 'pending') {
+                    socket.emit('error', { message: 'Invalid proposal or already processed' });
+                    return;
+                }
+        
+                user.proposals.pull({ proposalId: proposalId });
+                await user.save();
+        
+                socket.emit('proposalRejected', { message: 'Proposal has been rejected and removed.' });
+                
+            } catch (error) {
+                socket.emit('error', { message: 'Failed to reject and remove proposal' });
+            }
+        });
+        
 
         socket.on('disconnect', () => {
         });

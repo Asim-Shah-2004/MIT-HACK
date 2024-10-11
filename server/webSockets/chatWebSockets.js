@@ -1,13 +1,7 @@
-import http from 'http';
-import express from 'express';
-import {Server} from 'socket.io';
-import { SME, Investor, ChatRoom } from "../../models/index.js";
+import { SME, Investor, ChatRoom } from "../models/index.js";
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server)
 
-const chatRoom = () => {
+const chatRoom = async (io) => {
     io.on('connection', (socket) => {
 
         socket.on('send_message', async ({ senderId, userType, recipientEmail, message }) => {

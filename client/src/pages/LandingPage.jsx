@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowRight, CheckCircle, Menu, X, Github, Twitter, Linkedin, BarChart, Users, Zap } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Link } from 'react-router-dom'
+import OdooComp from '@/components/OdooComp'
 
 
 export default function LandingPage() {
@@ -186,6 +187,8 @@ export default function LandingPage() {
             </motion.div>
           </div>
         </section>
+
+        <OdooComp />
 
         {/* Features Section */}
         <section id="features" className="py-24 sm:py-32 bg-muted">

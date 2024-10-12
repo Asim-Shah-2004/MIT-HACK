@@ -10,7 +10,6 @@ const InvestorSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     password: {
       type: String,
@@ -24,72 +23,65 @@ const InvestorSchema = new Schema(
     location: {
       country: {
         type: String,
-        required: true,
+        required: false,
       },
       state: {
         type: String,
-        required: true,
+        required: false,
       },
       city: {
         type: String,
-        required: true,
+        required: false,
       },
     },
     profilePic: {
-      type: String, 
-      required: true,
+      data: Buffer,
+      contentType: String,
     },
     interestedIndustries: {
       type: [String],
       default: [],
     },
-    amountLookingToInvest: {
+    investmentAmount: {
       type: Number,
-      required: true,
+      required: false,
     },
     investmentType: {
       type: String,
-      required: true,
+      required: false,
     },
-    interestedInRuralBusiness: {
+    ruralBusinessInterest: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     engagementType: {
       type: String,
-      required: true,
+      enum: ['advisory', 'passive', 'active'],
+      required: false,
     },
-    proposals: [
-      {
-        proposalId: {
-          type: String,
-          required: true,
-        },
-        status: {
-          type: String,
-          enum: ['pending', 'accepted', 'rejected'],
-          default: 'pending',
-        },
-        senderEmail: {
-          type: String,
-          required: true,
-        },
-        senderName: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
     chats: [
       {
         personName: {
           type: String,
-          required: true,
+          required: false,
         },
         chatId: {
           type: String,
-          required: true,
+          required: false,
         },
+      },
+    ],
+    proposals: [
+      {
+        proposalId: { type: String, required: false },
+        status: { type: String, default: 'pending' },
+        senderEmail: { type: String, required: false },
+        senderName: { type: String, required: false },
+      },
+    ],
+    posts: [
+      {
+        postId: { type: String, required: false },
       },
     ],
   },

@@ -4,22 +4,28 @@ import AuthPage from './pages/AuthPage';
 import EventPage from './pages/EventPage';
 import { Route, Routes } from 'react-router-dom';
 import NetworkingPage from './pages/NetworkingPage';
+import NetworkingPage2 from './pages/NetworkingPage2';
 // import GanntPage from './pages/GanntPage';
 import { Toaster } from 'sonner';
-import NetworkingPage2 from './pages/NetworkingPage2';
+import { AuthProvider } from '@/context/AuthContext';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
     <div>
+      <AuthProvider>
+        <Toaster position="top-right" richColors />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/event" element={<EventPage />} />
+          <Route path="/network" element={<NetworkingPage2 />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<NetworkingPage2 />} /> */}
 
-      <Toaster position="top-right" richColors />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<AuthPage />} />
-        <Route path="/event" element={<EventPage />} />
-        <Route path="/network" element={<NetworkingPage2 />} />
         {/* <Route path="/calendar" element={<GanntPage />} /> */}
-      </Routes>
+        </Routes>
+      </AuthProvider>
     </div>
   )
 }

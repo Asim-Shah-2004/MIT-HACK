@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -8,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const nameRegex = /^[a-zA-Z\s]+$/;
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()\-_=+]+$/;
@@ -31,11 +33,13 @@ const registerSchema = z.object({
 
 const RegisterForm = () => {
   const [userType, setUserType] = useState('SME');
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = async (data) => {
+    Cookies.remove('jwtToken');
     try {
       await axios.post('http://localhost:3000/register', {
         ...data,
@@ -44,6 +48,7 @@ const RegisterForm = () => {
 
       toast.success("Registration successful", { description: `Welcome, ${data.name}!` });
       reset();
+      navigate('/network');
     } catch (error) {
       const errorMsg = error.response?.data?.message || error.message || 'An unknown error occurred';
       toast.error("Registration failed", { description: errorMsg });

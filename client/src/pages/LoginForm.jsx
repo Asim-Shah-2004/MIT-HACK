@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -6,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const loginSchema = z.object({
   email: z.string()
@@ -17,16 +19,19 @@ const loginSchema = z.object({
 });
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data) => {
+    Cookies.remove('jwtToken');
     try {
       await axios.post('http://localhost:3000/login', data, { withCredentials: true });
 
       toast.success("Login successful", { description: `Welcome back!` });
       reset();
+      navigate('/network');
     } catch (error) {
       const errorMsg = error.response?.data?.message || error.message || 'An unknown error occurred';
       toast.error("Login failed", { description: errorMsg });

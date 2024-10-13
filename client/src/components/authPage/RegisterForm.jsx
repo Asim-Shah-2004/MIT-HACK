@@ -59,7 +59,7 @@ const RegisterForm = () => {
       </h2>
 
       <Tabs value={userType} onValueChange={setUserType} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-6">
+        <TabsList className="grid w-full grid-cols-3 mb-6 bg-dark2 text-light2">
           <TabsTrigger value="SME">SME</TabsTrigger>
           <TabsTrigger value="Investor">Investor</TabsTrigger>
           <TabsTrigger value="Mentor">Mentor</TabsTrigger>
@@ -85,7 +85,7 @@ const RegisterForm = () => {
           {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
 
-        <Button type="submit" className="w-full" disabled={loading}>
+        <Button type="submit" className="w-fulls" disabled={loading}>
           {loading ? 'Signing Up...' : `Sign Up as ${userType}`}
         </Button>
       </form>

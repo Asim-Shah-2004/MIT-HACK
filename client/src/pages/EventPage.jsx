@@ -126,7 +126,7 @@ const EventGrid = ({ events }) => (
 )
 
 // Main Dashboard Component
-export default function Dashboard() {
+export default function EventPage() {
   const [activeTab, setActiveTab] = useState("registration")
 
   const registrationEvents = [

@@ -8,6 +8,7 @@ import NetworkingPage2 from './pages/NetworkingPage2';
 // import GanntPage from './pages/GanntPage';
 import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context/AuthContext';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -19,7 +20,10 @@ function App() {
           <Route path="/login" element={<AuthPage />} />
           <Route path="/event" element={<EventPage />} />
           <Route path="/network" element={<NetworkingPage2 />} />
-          {/* <Route path="/calendar" element={<GanntPage />} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<NetworkingPage2 />} /> */}
+
+        {/* <Route path="/calendar" element={<GanntPage />} /> */}
         </Routes>
       </AuthProvider>
     </div>

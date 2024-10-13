@@ -7,6 +7,7 @@ import registerMentor from "./userControllers/registerMentor.js";
 import loginUser from "./userControllers/login.js";
 import createEvent from "./EventControllers/createEvent.js";
 import updateEvent from "./EventControllers/updateEvent.js";
+import deleteEvent from "./EventControllers/deleteEvent.js";
 
 export{
     registerSME,
@@ -17,5 +18,6 @@ export{
     registerMentor,
     loginUser,
     createEvent,
-    updateEvent
+    updateEvent,
+    deleteEvent
 }

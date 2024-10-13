@@ -1,12 +1,21 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import RegisterForm from './RegisterForm';
-import LoginForm from './LoginForm';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import RegisterForm from '@/components/RegisterForm';
+import LoginForm from '@/components/LoginForm';
+import useAuth from '@/hooks/useAuth';
 
 const AuthPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, loading } = useAuth();
   const initialIsRegistered = location.state?.initialIsRegistered ?? true;
   const [isRegistered, setIsRegistered] = useState(initialIsRegistered);
+
+  useEffect(() => {
+    if (!loading && user)
+      navigate('/network');
+  }, [loading, user, navigate]);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center p-4">

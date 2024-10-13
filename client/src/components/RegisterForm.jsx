@@ -8,8 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import useAuth from '@/hooks/useAuth';
+
 
 const nameRegex = /^[a-zA-Z\s]+$/;
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()\-_=+]+$/;
@@ -34,18 +34,14 @@ const registerSchema = z.object({
 const RegisterForm = () => {
   const [userType, setUserType] = useState('SME');
   const navigate = useNavigate();
+  const { register: authRegister, loading } = useAuth();
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = async (data) => {
-    Cookies.remove('jwtToken');
     try {
-      await axios.post('http://localhost:3000/register', {
-        ...data,
-        userType,
-      }, { withCredentials: true });
-
+      await authRegister({ ...data, userType });
       toast.success("Registration successful", { description: `Welcome, ${data.name}!` });
       reset();
       navigate('/network');
@@ -86,7 +82,9 @@ const RegisterForm = () => {
           {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
 
-        <Button type="submit" className="w-full">Sign Up as {userType}</Button>
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? 'Signing Up...' : `Sign Up as ${userType}`}
+        </Button>
       </form>
     </div>
   );

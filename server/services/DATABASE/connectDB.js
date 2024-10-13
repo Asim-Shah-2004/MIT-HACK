@@ -4,7 +4,9 @@ import logger from '../../utils/logger.js';
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.DATABASE_URL)
+        await mongoose.connect(process.env.DATABASE_URL,{
+            autoIndex:false
+        })
         logger.info('connected to database successfully');
     } catch (err) {
         console.error(err)

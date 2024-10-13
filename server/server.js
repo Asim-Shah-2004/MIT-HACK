@@ -7,8 +7,9 @@ import http from 'http';
 
 import {Server} from 'socket.io';
 import { connectDB } from "./services/index.js";
-import { registerRouter , postRouter } from './routers/index.js';
+import { registerRouter , postRouter ,loginRouter } from './routers/index.js';
 import { proposal,chatRoom } from './webSockets/index.js';
+import {authenticateToken} from "./middlewares/index.js"
 
 const PORT = process.env.PORT;
 const app = express();
@@ -29,7 +30,10 @@ chatRoom(io)
  */
 
 app.use('/register', registerRouter);
+app.use('/login',loginRouter)
 app.use('/post',postRouter)
+
+// app.use(authenticateToken)
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>');

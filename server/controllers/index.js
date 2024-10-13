@@ -4,6 +4,7 @@ import addComment from "./communityControllers/commentPost.js";
 import addLike from "./communityControllers/LikePost.js";
 import registerInvestor from "./userControllers/registerInvestor.js"
 import registerMentor from "./userControllers/registerMentor.js";
+import loginUser from "./userControllers/login.js";
 
 export{
     registerSME,
@@ -11,5 +12,6 @@ export{
     addComment,
     addLike,
     registerInvestor,
-    registerMentor
+    registerMentor,
+    loginUser
 }

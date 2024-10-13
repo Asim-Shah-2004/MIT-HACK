@@ -7,7 +7,7 @@ import http from 'http';
 
 import {Server} from 'socket.io';
 import { connectDB } from "./services/index.js";
-import { registerRouter , postRouter ,loginRouter } from './routers/index.js';
+import { registerRouter , postRouter ,loginRouter , eventRouter } from './routers/index.js';
 import { proposal,chatRoom } from './webSockets/index.js';
 import {authenticateToken} from "./middlewares/index.js"
 
@@ -21,9 +21,6 @@ connectDB();
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-proposal(io)
-chatRoom(io)
-
 /**
  * VVIP Remember to send ID created anywhere to frontend as it will be used
  * to identify things such as posts proposals etc
@@ -31,9 +28,14 @@ chatRoom(io)
 
 app.use('/register', registerRouter);
 app.use('/login',loginRouter)
-app.use('/post',postRouter)
 
 // app.use(authenticateToken)
+
+proposal(io)
+chatRoom(io)
+
+app.use('/post',postRouter)
+app.use('/events',eventRouter)
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>');

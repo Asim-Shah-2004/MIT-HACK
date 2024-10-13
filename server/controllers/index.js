@@ -9,6 +9,7 @@ import createEvent from "./EventControllers/createEvent.js";
 import updateEvent from "./EventControllers/updateEvent.js";
 import deleteEvent from "./EventControllers/deleteEvent.js";
 import addParticipantToPublicEvent from "./EventControllers/participatePublicEvent.js";
+import addParticipantPrivate from "./EventControllers/participatePrivateEvent.js";
 
 export{
     registerSME,
@@ -21,5 +22,6 @@ export{
     createEvent,
     updateEvent,
     deleteEvent,
-    addParticipantToPublicEvent
+    addParticipantToPublicEvent,
+    addParticipantPrivate
 }

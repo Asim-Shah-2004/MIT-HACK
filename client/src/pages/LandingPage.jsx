@@ -15,7 +15,7 @@ export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false)
   const { scrollYProgress } = useScroll()
   const navigate = useNavigate();
-  
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,9 +62,11 @@ export default function LandingPage() {
               <Link href="#contact" className="text-sm font-medium hover:text-primary">Contact</Link>
             </nav>
             <div className="hidden md:flex items-center space-x-4">
-              <Button variant="outline">Log in</Button>
+              <Button variant="outline"
+                onClick={() => navigate('/login')}
+              >Log in</Button>
               <Button
-                onClick={() => navigate('/register')}
+                onClick={() => navigate('/login', { state: { initialIsRegistered: false } })}
               >Sign up</Button>
             </div>
             <div className="md:hidden">
@@ -133,7 +135,7 @@ export default function LandingPage() {
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
               >
                 <img
-                  src= {"https://contiguglia.com/wp-content/uploads/2019/06/7CD05707-3C05-4A36-AF95-8DACE7380EFD-1080x675.jpeg"}
+                  src={"https://contiguglia.com/wp-content/uploads/2019/06/7CD05707-3C05-4A36-AF95-8DACE7380EFD-1080x675.jpeg"}
                   alt="Hero Image"
                   style={{ width: '100%', height: '100%', objectFit: "cover" }}
                   className="rounded-lg shadow-2xl"
@@ -309,7 +311,7 @@ export default function LandingPage() {
             >
               {[
                 {
-                  name:  "Alex Johnson",
+                  name: "Alex Johnson",
                   role: "CEO, TechCorp",
                   content: "This platform has completely transformed how we manage our projects. The AI insights are a game-changer!"
                 },

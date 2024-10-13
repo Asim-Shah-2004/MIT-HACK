@@ -1,4 +1,4 @@
-import {Event} from '../../models/index.js';
+import { SME, Investor, Mentor, Event } from '../../models/index.js';
 import crypto from 'crypto';
 
 const createEvent = async (req, res) => {
@@ -17,10 +17,6 @@ const createEvent = async (req, res) => {
     eventImage,
   } = req.body;
 
-  if (!creatorEmail || !eventDate || !startTime || !endTime || !location || !eventFormat || !eventDescription || !eventType || !audience) {
-    return res.status(400).json({ msg: 'Required fields are missing' });
-  }
-
   try {
     const eventId = crypto.randomBytes(16).toString('hex');
 
@@ -31,19 +27,37 @@ const createEvent = async (req, res) => {
       startTime,
       endTime,
       location,
-      registrationFee: registrationFee || 'Free',
+      registrationFee,
       maxAttendees,
       eventFormat,
       eventDescription,
       eventType,
       audience,
       eventImage,
+      waitingApproval: [],
     });
 
     await newEvent.save();
+
+    let user = await SME.findOne({ email: creatorEmail });
+    if (!user) {
+      user = await Investor.findOne({ email: creatorEmail });
+    }
+    if (!user) {
+      user = await Mentor.findOne({ email: creatorEmail });
+    }
+
+    if (!user) {
+      return res.status(404).json({ msg: 'Creator not found' });
+    }
+
+    user.events.push(eventId); 
+    await user.save();
+
     res.status(201).json({ msg: 'Event created successfully', event: newEvent });
   } catch (error) {
-    res.status(500).json({ msg: 'Server error', error });
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
   }
 };
 

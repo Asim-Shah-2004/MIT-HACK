@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const EventSchema = new Schema({
   eventId: {
@@ -29,36 +29,24 @@ const EventSchema = new Schema({
   },
   registrationFee: {
     type: String,
-    default: 'Free',
+    required: true,
   },
   maxAttendees: {
     type: Number,
     required: true,
   },
-  eventImage: {
-    data: Buffer,
-    contentType: String,
-  },
   eventFormat: {
     type: String,
-    enum: ['Offline', 'Online', 'Hybrid'],
+    enum: ['offline', 'online', 'hybrid'],
     required: true,
   },
   eventDescription: {
     type: String,
     required: true,
   },
-  participants: [
-    {
-      email: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
   eventType: {
     type: String,
-    enum: ['Public', 'Private'],
+    enum: ['public', 'private'],
     required: true,
   },
   audience: {
@@ -66,7 +54,20 @@ const EventSchema = new Schema({
     enum: ['SMEs', 'Investors', 'Mentors', 'All'],
     required: true,
   },
+  eventImage: {
+    type: String,
+    required: false,
+  },
+  waitingApproval: [
+    {
+      participantEmail: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 const Event = mongoose.model('Event', EventSchema);
+
 export default Event;

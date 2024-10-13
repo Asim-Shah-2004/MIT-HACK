@@ -78,6 +78,11 @@ const SMESchema = new Schema(
         postId: { type: String, required: false },
       },
     ],
+    events: [
+      {
+        type: String,
+      }
+    ]
   },
   { collection: 'SME' }
 );

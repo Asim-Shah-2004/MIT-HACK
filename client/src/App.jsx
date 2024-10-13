@@ -6,16 +6,18 @@ import { Route, Routes } from 'react-router-dom';
 import NetworkingPage from './pages/NetworkingPage';
 // import GanntPage from './pages/GanntPage';
 import { Toaster } from 'sonner';
+import NetworkingPage2 from './pages/NetworkingPage2';
 
 function App() {
   return (
     <div>
+
       <Toaster position="top-right" richColors />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/event" element={<EventPage />} />
-        <Route path="/network" element={<NetworkingPage />} />
+        <Route path="/network" element={<NetworkingPage2 />} />
         {/* <Route path="/calendar" element={<GanntPage />} /> */}
       </Routes>
     </div>

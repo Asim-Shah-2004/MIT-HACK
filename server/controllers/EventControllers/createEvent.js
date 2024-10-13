@@ -35,6 +35,7 @@ const createEvent = async (req, res) => {
       audience,
       eventImage,
       waitingApproval: [],
+      participants:[]
     });
 
     await newEvent.save();

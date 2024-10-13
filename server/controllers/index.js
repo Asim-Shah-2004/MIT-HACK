@@ -8,6 +8,7 @@ import loginUser from "./userControllers/login.js";
 import createEvent from "./EventControllers/createEvent.js";
 import updateEvent from "./EventControllers/updateEvent.js";
 import deleteEvent from "./EventControllers/deleteEvent.js";
+import addParticipantToPublicEvent from "./EventControllers/participatePublicEvent.js";
 
 export{
     registerSME,
@@ -19,5 +20,6 @@ export{
     loginUser,
     createEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent,
+    addParticipantToPublicEvent
 }

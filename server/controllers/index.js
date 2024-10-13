@@ -6,6 +6,7 @@ import registerInvestor from "./userControllers/registerInvestor.js"
 import registerMentor from "./userControllers/registerMentor.js";
 import loginUser from "./userControllers/login.js";
 import createEvent from "./EventControllers/createEvent.js";
+import updateEvent from "./EventControllers/updateEvent.js";
 
 export{
     registerSME,
@@ -15,5 +16,6 @@ export{
     registerInvestor,
     registerMentor,
     loginUser,
-    createEvent
+    createEvent,
+    updateEvent
 }

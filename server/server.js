@@ -7,7 +7,7 @@ import http from 'http';
 
 import {Server} from 'socket.io';
 import { connectDB } from "./services/index.js";
-import { registerRouter , postRouter } from './routers/index.js';
+import { registerRouter , postRouter ,registerInventoryRouter,registerWarehouseOwnerRouter} from './routers/index.js';
 import { proposal,chatRoom } from './webSockets/index.js';
 
 const PORT = process.env.PORT;
@@ -30,6 +30,8 @@ chatRoom(io)
 
 app.use('/register', registerRouter);
 app.use('/post',postRouter)
+app.use('/register/inventory',registerInventoryRouter);
+app.use('/register/warehouse',registerWarehouseOwnerRouter);
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>');

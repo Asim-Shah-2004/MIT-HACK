@@ -3,11 +3,14 @@ import ChatRoom from "./chatRoom.js"
 import Investor from "./investor.js"
 import Post from "./posts.js"
 import Mentor from "./mentor.js"
-
+import { WarehouseOwner } from "./warehouseOwner.js"
+import { InventorySpace } from "./inventory.js"
 export{
     SME,
     ChatRoom,
     Investor,
     Post,
-    Mentor
+    Mentor,
+    WarehouseOwner,
+    InventorySpace
 }

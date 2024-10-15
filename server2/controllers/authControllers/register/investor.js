@@ -1,5 +1,5 @@
 import {Investor,WarehouseOwner,Entrepreneur} from "../../../models/index.js"
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import crypto from "crypto";
 
 const registerInvestor = async (req, res) => {
@@ -50,7 +50,8 @@ const registerInvestor = async (req, res) => {
       investmentType,
       interestedInRuralBusiness,
       engagementType,
-      proposals: [],
+      proposalsSent: [],
+      proposalsReceived:[],
       chats: [],
       investmentHistory: [],
     });

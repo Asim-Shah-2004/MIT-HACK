@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
+import crypto from "crypto"
 import { Entrepreneur,Investor,WarehouseOwner } from "../../../models/index.js";
+
 const registerWarehouseOwner = async (req, res) => {
   const { fullName, email, password, phoneNumber, profilePic } = req.body;
 
@@ -23,22 +25,24 @@ const registerWarehouseOwner = async (req, res) => {
       return res.status(400).json({ msg: "Already registered as an investor." });
     }
 
-
+    const warehouseOwnerID = crypto.randomBytes(16).toString("hex");
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const warehouseOwner = new WarehouseOwner({
+      warehouseOwnerID,
       fullName,
       email,
       password: hashedPassword,
       phoneNumber,
-      profilePic,
+      chats:[],
+      profilePic : profilePic ? Buffer.from(profilePic, "base64") : null,
       properties: [],  
     });
 
     await warehouseOwner.save();
 
-    res.status(201).json({ msg: "Warehouse owner registered successfully", warehouseOwner });
+    res.status(201).json({ msg: "Warehouse owner registered successfully", warehouseOwnerID });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error. Please try again." });

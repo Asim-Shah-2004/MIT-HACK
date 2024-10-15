@@ -19,7 +19,8 @@ const warehouseOwnerSchema = new mongoose.Schema({
     required: true,
   },
   profilePic: {
-    type: String,
+    type: Buffer, 
+    default: null,
   },
   properties: [{
     propertyName: { type: String, required: true },

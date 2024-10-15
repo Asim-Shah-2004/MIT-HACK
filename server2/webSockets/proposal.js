@@ -33,7 +33,7 @@ const proposal = async (io) => {
                     attachment: attachment || null,
                 });
 
-                newProposal.save()
+                await newProposal.save()
 
                 sender.proposalsSent.push({
                     proposalId,
@@ -42,7 +42,7 @@ const proposal = async (io) => {
                     receiverName : recipient.fullName,
                 })
 
-                sender.save()
+                await sender.save()
 
                 recipient.proposalsReceived.push({
                     proposalId,
@@ -51,7 +51,7 @@ const proposal = async (io) => {
                     senderName : sender.fullName,
                 })
 
-                recipient.save()
+                await recipient.save()
 
                 socket.emit('proposalSent', { proposalId, recipientId });
 

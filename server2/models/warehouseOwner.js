@@ -18,12 +18,38 @@ const warehouseOwnerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  chats: [
+    {
+      personName: {
+        type: String,
+        required: true,
+      },
+      chatId: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   profilePic: {
-    type: String,
+    type: Buffer, 
+    default: null,
   },
   properties: [{
     propertyName: { type: String, required: true },
-    location: { type: String, required: true },
+    location: {
+        country: {
+          type: String,
+          required: true,
+        },
+        state: {
+          type: String,
+          required: true,
+        },
+        city: {
+          type: String,
+          required: true,
+        },
+      },
     totalSpace: { type: Number, required: true },
     availableSpace: { type: Number, required: true },
     pricePerSpace: { type: Number, required: true },

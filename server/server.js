@@ -7,7 +7,7 @@ import http from 'http';
 
 import {Server} from 'socket.io';
 import { connectDB } from "./services/index.js";
-import { registerRouter , postRouter ,loginRouter , eventRouter } from './routers/index.js';
+import { registerRouter , postRouter ,registerInventoryRouter,registerWarehouseOwnerRouter,loginRouter , eventRouter } from './routers/index.js';
 import { proposal,chatRoom } from './webSockets/index.js';
 import {authenticateToken} from "./middlewares/index.js"
 
@@ -35,6 +35,8 @@ proposal(io)
 chatRoom(io)
 
 app.use('/post',postRouter)
+app.use('/register/inventory',registerInventoryRouter);
+app.use('/register/warehouse',registerWarehouseOwnerRouter);
 app.use('/events',eventRouter)
 
 app.get('/', (req, res) => {

@@ -2,6 +2,8 @@ import registerSME from "./userControllers/registerSME.js";
 import addPost from "./communityControllers/addPost.js";
 import addComment from "./communityControllers/commentPost.js";
 import addLike from "./communityControllers/LikePost.js";
+import registerInventory from "./userControllers/registerInventory.js";
+import registerWarehouseOwner from "./userControllers/registerWarehouseOwner.js";
 import registerInvestor from "./userControllers/registerInvestor.js"
 import registerMentor from "./userControllers/registerMentor.js";
 import loginUser from "./userControllers/login.js";
@@ -16,6 +18,8 @@ export{
     addPost,
     addComment,
     addLike,
+    registerInventory,
+    registerWarehouseOwner,
     registerInvestor,
     registerMentor,
     loginUser,

@@ -10,7 +10,14 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  Label
+} from 'recharts';
 import useTheme from "@/hooks/useTheme";
 import Navbar from "./Navbar";
 
@@ -53,16 +60,20 @@ const ProposalPage = () => {
             </CardHeader>
             <CardContent className="overflow-y-auto h-60">
               {proposals.filter(p => p.status === 'pending').map(proposal => (
-                <div key={proposal.id} className="flex items-center justify-between py-2 border-b last:border-b-0">
-                  <Button variant="link" className={isDarkMode ? 'text-white' : 'text-dark1'} onClick={() => setSelectedProposal(proposal)}>
+                <div key={proposal.id} className="flex items-center justify-between p-2 border-2 rounded-xl mb-1">
+                  <Button
+                    variant="link"
+                    className={`flex flex-1 justify-start ${isDarkMode ? 'text-white' : 'text-dark1'} text-md`}
+                    onClick={() => setSelectedProposal(proposal)}
+                  >
                     {proposal.title}
                   </Button>
                   <div>
-                    <Button variant="ghost" size="icon" onClick={() => handleProposalChange(proposal.id, 'rejected')}>
-                      <X className={`h-4 w-4 ${isDarkMode ? 'text-white' : 'text-dark1'}`} />
+                    <Button variant="ghost" size="icon" className="mr-4 border-2" onClick={() => handleProposalChange(proposal.id, 'rejected')}>
+                      <X className={"h-4 w-4 text-red-500"} />
                     </Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleProposalChange(proposal.id, 'accepted')}>
-                      <Check className={`h-4 w-4 ${isDarkMode ? 'text-white' : 'text-dark1'}`} />
+                    <Button variant="ghost" size="icon" className="border-2" onClick={() => handleProposalChange(proposal.id, 'rejected')}>
+                      <Check className={"h-4 w-4 text-green-500"} />
                     </Button>
                   </div>
                 </div>
@@ -75,15 +86,27 @@ const ProposalPage = () => {
               <CardTitle className={isDarkMode ? 'text-white' : 'text-dark1'}>Proposal Statistics</CardTitle>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={200}>
-                <PieChart>
-                  <Pie data={chartData} cx="50%" cy="50%" outerRadius={80} fill="#8884d8" dataKey="value">
-                    {chartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
+              {/* <div className="select-none"> Prevents text selection */}
+                <ResponsiveContainer width="100%" height={200}>
+                  <PieChart>
+                    <Pie
+                      data={chartData}
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                      isAnimationActive={true} // Enable animation
+                      // pointerEvents="none" // Disable interactions
+                    >
+                      {chartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              {/* </div> */}
               <div className="flex justify-center mt-4">
                 {chartData.map((entry, index) => (
                   <div key={`legend-${index}`} className="flex items-center mr-4">
@@ -135,7 +158,11 @@ const ProposalPage = () => {
           <CardContent className="overflow-y-auto h-60">
             {proposals.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5).map(proposal => (
               <div key={proposal.id} className="flex items-center justify-between py-2 border-b last:border-b-0">
-                <Button variant="link" className={isDarkMode ? 'text-white' : 'text-dark1'} onClick={() => setSelectedProposal(proposal)}>
+                <Button
+                  variant="link"
+                  className={`flex flex-1 justify-start ${isDarkMode ? 'text-white' : 'text-dark1'} text-md`}
+                  onClick={() => setSelectedProposal(proposal)}
+                >
                   {proposal.title}
                 </Button>
                 <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-muted-foreground'}`}>{proposal.date}</span>
@@ -145,7 +172,7 @@ const ProposalPage = () => {
         </Card>
 
         <Dialog open={!!selectedProposal} onOpenChange={() => setSelectedProposal(null)}>
-          <DialogContent className={isDarkMode ? 'bg-dark2 text-light2' : 'bg-light2 text-dark1'}>
+          <DialogContent hideClose className={isDarkMode ? 'bg-dark2 text-light2 [&>button]:hidden' : 'bg-light2 text-dark1 [&>button]:hidden'}>
             <DialogHeader>
               <DialogTitle className={isDarkMode ? 'text-white' : 'text-dark1'}>{selectedProposal?.title}</DialogTitle>
               <Button variant="ghost" size="icon" className={`absolute right-4 top-4 ${isDarkMode ? 'text-white' : 'text-dark1'}`} onClick={() => setSelectedProposal(null)}>

@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<AuthPage />} />
-          <Route path="/event" element={<EventPage />} />
+          <Route path="/events" element={<EventPage />} />
           <Route path="/network" element={<NetworkingPage2 />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/chat" element={<Elev8Chat />} />

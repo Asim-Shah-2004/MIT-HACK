@@ -46,6 +46,9 @@ const ChatRoomSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    docID : {
+        type: String,
+    }
   },
   { collection: "ChatRoom" }
 );

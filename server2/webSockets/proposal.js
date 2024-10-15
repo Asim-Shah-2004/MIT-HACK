@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { Entrepreneur , Investor , WarehouseOwner , ChatRoom , Proposal } from "../models/index.js";
+import { Entrepreneur , Investor , WarehouseOwner , ChatRoom , Proposal , Doc } from "../models/index.js";
 
 const proposal = async (io) => {
     io.on('connection', (socket) => {
@@ -89,6 +89,7 @@ const proposal = async (io) => {
                 await user.save();
 
                 const chatId = crypto.randomBytes(16).toString('hex');
+                const docID = crypto.randomBytes(16).toString('hex');
 
                 const chatRoom = new ChatRoom({
                     chatId,
@@ -97,10 +98,19 @@ const proposal = async (io) => {
                         { email: proposal.senderEmail, name: proposal.senderName }
                     ],
                     messages: [],
-                    createdAt : Date.now()
+                    createdAt : Date.now(),
+                    docID
                 });
 
+                const doc = new Doc(
+                    {
+                        docID,
+                        messages: ""
+                    }
+                )
+
                 await chatRoom.save();
+                await doc.save();
 
                 user.chats.push({ personName: proposal.senderName, chatId });
                 await user.save();

@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import useAuth from '@/hooks/useAuth';
-import { useTheme } from '@/context/ThemeContext';
+// import { useTheme } from '@/context/ThemeContext';
+import useTheme from '@/hooks/useTheme';
 
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()\-_=+]+$/;
 const loginSchema = z.object({
@@ -41,7 +42,7 @@ const LoginForm = () => {
       toast.error("Login failed", { description: errorMsg });
     }
   };
-  const { isDarkMode } = useTheme();
+
 
   return (
     <div className={`p-6 rounded-lg text-dark2`}>

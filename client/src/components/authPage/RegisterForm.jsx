@@ -8,8 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import useAuth from '@/hooks/useAuth';
+import useTheme from '@/hooks/useTheme';
 
 const nameRegex = /^[a-zA-Z\s]+$/;
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()\-_=+]+$/;
@@ -34,18 +34,15 @@ const registerSchema = z.object({
 const RegisterForm = () => {
   const [userType, setUserType] = useState('SME');
   const navigate = useNavigate();
+  const { register: authRegister, loading } = useAuth();
+  const { isDarkMode } = useTheme();
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = async (data) => {
-    Cookies.remove('jwtToken');
     try {
-      await axios.post('http://localhost:3000/register', {
-        ...data,
-        userType,
-      }, { withCredentials: true });
-
+      await authRegister({ ...data, userType });
       toast.success("Registration successful", { description: `Welcome, ${data.name}!` });
       reset();
       navigate('/network');
@@ -57,10 +54,12 @@ const RegisterForm = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Join Our Investment Network</h2>
+      <h2 className={`text-3xl font-bold text-center ${isDarkMode ? 'text-white' : 'text-gray-800'} mb-6`}>
+        Join Our Investment Network
+      </h2>
 
       <Tabs value={userType} onValueChange={setUserType} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-6">
+        <TabsList className="grid w-full grid-cols-3 mb-6 bg-dark2 text-light2">
           <TabsTrigger value="SME">SME</TabsTrigger>
           <TabsTrigger value="Investor">Investor</TabsTrigger>
           <TabsTrigger value="Mentor">Mentor</TabsTrigger>
@@ -70,23 +69,25 @@ const RegisterForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="name">Name</Label>
-          <Input id="name" placeholder="John Doe" {...register("name")} />
+          <Input id="name" placeholder="John Doe" {...register("name")} className={isDarkMode ? 'bg-gray-600 text-white' : 'bg-white text-black'} />
           {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="john@example.com" {...register("email")} />
+          <Input id="email" type="email" placeholder="john@example.com" {...register("email")} className={isDarkMode ? 'bg-gray-600 text-white' : 'bg-white text-black'} />
           {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" placeholder="********" {...register("password")} />
+          <Input id="password" type="password" placeholder="********" {...register("password")} className={isDarkMode ? 'bg-gray-600 text-white' : 'bg-white text-black'} />
           {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
 
-        <Button type="submit" className="w-full">Sign Up as {userType}</Button>
+        <Button type="submit" className="w-fulls" disabled={loading}>
+          {loading ? 'Signing Up...' : `Sign Up as ${userType}`}
+        </Button>
       </form>
     </div>
   );

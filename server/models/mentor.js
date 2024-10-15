@@ -121,6 +121,11 @@ const MentorSchema = new Schema(
         },
       },
     ],
+    events: [
+      {
+        type: String,
+      }
+    ]
   },
   { collection: 'Mentor' }
 );

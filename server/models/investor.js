@@ -84,6 +84,11 @@ const InvestorSchema = new Schema(
         postId: { type: String, required: false },
       },
     ],
+    events: [
+      {
+        type: String,
+      }
+    ]
   },
   { collection: 'Investor' }
 );

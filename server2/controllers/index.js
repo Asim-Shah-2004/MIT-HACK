@@ -1,8 +1,10 @@
-import registerWarehouseOwner from "./authControllers/register/registerWarehouseOwner.js";
+import registerWarehouseOwner from "./authControllers/register/warehouseOwner.js";
 import registerEntrepreneur from "./authControllers/register/entrepreneur.js";
+import registerInvestor from "./authControllers/register/investor.js";
 
 
 export{
     registerWarehouseOwner,
-    registerEntrepreneur
+    registerEntrepreneur,
+    registerInvestor
 }

@@ -9,7 +9,7 @@ import {logger} from './utils/index.js';
 import { connectDB } from "./services/index.js";
 import { registerRouter , loginRouter } from './routers/index.js';
 import {authenticateToken} from "./middlewares/index.js"
-import {proposal,chats} from "./webSockets/index.js"
+import {proposal,chats,document} from "./webSockets/index.js"
 
 const PORT = process.env.PORT;
 const app = express();
@@ -28,6 +28,8 @@ app.use(authenticateToken)
 
 proposal(io)
 chats(io)
+document(io)
+
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>');
 });

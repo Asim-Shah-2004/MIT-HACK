@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useTheme from "@/hooks/useTheme";
 import Navbar from "./Navbar";
-import dayjs from "dayjs"; // Import dayjs for formatting dates
+import dayjs from "dayjs";
 
 const darkColors = {
   background: '#212A31',

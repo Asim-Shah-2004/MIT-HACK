@@ -53,7 +53,7 @@ export default {
 				'4': 'hsl(var(--chart-4))',
 				'5': 'hsl(var(--chart-5))'
 			},
-			dark1: '#212A31',
+			dark1: '#121517',
 			dark2: '#2E3944',
 			medium: '#124E66',
 			light1: '#748D92',

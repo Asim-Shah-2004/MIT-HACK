@@ -10,6 +10,7 @@ import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context/AuthContext';
 import Dashboard from './pages/Dashboard';
 import Elev8Chat from "@/components/Chat";
+import ProposalPage from '@/components/Proposal';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/network" element={<NetworkingPage2 />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/chat" element={<Elev8Chat />} />
+          <Route path="/proposal" element={<ProposalPage />} />
           {/* <Route path="/dashboard" element={<NetworkingPage2 />} /> */}
 
           {/* <Route path="/calendar" element={<GanntPage />} /> */}

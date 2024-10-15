@@ -27,4 +27,6 @@ const inventorySpaceSchema = new mongoose.Schema({
   }
 });
 
-export const InventorySpace = mongoose.model('InventorySpace', inventorySpaceSchema);
+const InventorySpace = mongoose.model('InventorySpace', inventorySpaceSchema);
+
+export default InventorySpace;

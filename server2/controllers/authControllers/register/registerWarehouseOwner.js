@@ -1,8 +1,5 @@
 import bcrypt from "bcrypt";
-import Entrepreneur from "../models/Entrepreneur.js"; 
-import Investor from "../models/Investor.js"; 
-import WarehouseOwner from "../models/WarehouseOwner.js"; 
-
+import { Entrepreneur,Investor,WarehouseOwner } from "../../../models/index.js";
 const registerWarehouseOwner = async (req, res) => {
   const { fullName, email, password, phoneNumber, profilePic } = req.body;
 

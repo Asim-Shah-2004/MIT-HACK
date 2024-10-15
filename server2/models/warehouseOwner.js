@@ -65,4 +65,6 @@ const warehouseOwnerSchema = new mongoose.Schema({
   }]
 });
 
-export const WarehouseOwner = mongoose.model('WarehouseOwner', warehouseOwnerSchema);
+const WarehouseOwner = mongoose.model('WarehouseOwner', warehouseOwnerSchema);
+
+export default WarehouseOwner

@@ -1,7 +1,5 @@
-import Entrepreneur from "../models/Entrepreneur.js"; 
-import Investor from "../models/Investor.js"; 
-import WarehouseOwner from "../models/WarehouseOwner.js"; 
-import bcrypt from "bcryptjs"; 
+import {Entrepreneur,Investor,WarehouseOwner} from "../../../models/index.js"; 
+import bcrypt from "bcrypt"; 
 import crypto from "crypto"; 
 
 const registerEntrepreneur = async (req, res) => {

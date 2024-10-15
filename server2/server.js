@@ -26,7 +26,7 @@ app.use('/login',loginRouter)
 app.use(authenticateToken)
 
 proposal(io)
-
+chats(io)
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>');
 });

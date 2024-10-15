@@ -29,3 +29,4 @@ const chats = (io) =>{
         });
     });
 }
+export default chats;

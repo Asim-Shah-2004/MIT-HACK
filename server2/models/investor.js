@@ -145,6 +145,13 @@ const InvestorSchema = new Schema(
         },
       },
     ],
+    posts:[
+      {
+        postId:{
+          type: String,
+        }
+      }
+    ]
   },
   { collection: "Investors" }
 );

@@ -101,6 +101,13 @@ const EntrepreneurSchema = new Schema(
         },
       },
     ],
+    posts:[
+      {
+        postId:{
+          type: String,
+        }
+      }
+    ]
   },
   { collection: "Entrepreneurs" }
 );

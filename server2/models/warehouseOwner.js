@@ -62,7 +62,14 @@ const warehouseOwnerSchema = new mongoose.Schema({
 
   rentedInventories: [{
     type: String, 
-  }]
+  }],
+  posts:[
+    {
+      postId:{
+        type: String,
+      }
+    }
+  ]
 });
 
 const WarehouseOwner = mongoose.model('WarehouseOwner', warehouseOwnerSchema);

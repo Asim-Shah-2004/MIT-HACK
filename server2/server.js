@@ -7,7 +7,7 @@ import "dotenv/config";
 import {Server} from 'socket.io';
 import {logger} from './utils/index.js';
 import { connectDB } from "./services/index.js";
-import { registerRouter , loginRouter } from './routers/index.js';
+import { registerRouter , loginRouter , postRouter } from './routers/index.js';
 import {authenticateToken} from "./middlewares/index.js"
 import {proposal,chats,document} from "./webSockets/index.js"
 
@@ -23,8 +23,9 @@ app.use(morgan('dev'));
 
 app.use('/register', registerRouter);
 app.use('/login',loginRouter)
+app.use('/post',postRouter)
 
-app.use(authenticateToken)
+// app.use(authenticateToken)
 
 proposal(io)
 chats(io)

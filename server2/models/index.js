@@ -6,6 +6,8 @@ import  InventorySpace  from "./inventory.js"
 import Entrepreneur from "./entrepreneur.js"
 import Proposal from "./proposal.js"
 import Doc from "./document.js"
+import Post from "./posts.js"
+
 export{
     ChatRoom,
     Investor,
@@ -14,5 +16,6 @@ export{
     Entrepreneur,
     Proposal,
     RegisteredBusiness,
-    Doc
+    Doc, 
+    Post
 }

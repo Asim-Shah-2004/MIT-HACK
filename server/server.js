@@ -1,49 +1,62 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import morgan from 'morgan';
+import express from "express";
+import morgan from "morgan";
+import http from "http";
+import cors from "cors";
 import "dotenv/config";
-import logger from './utils/logger.js';
-import http from 'http';
 
-import {Server} from 'socket.io';
+import { Server } from "socket.io";
+import { logger } from "./utils/index.js";
 import { connectDB } from "./services/index.js";
-import { registerRouter , postRouter ,registerInventoryRouter,registerWarehouseOwnerRouter,loginRouter , eventRouter } from './routers/index.js';
-import { proposal,chatRoom } from './webSockets/index.js';
-import {authenticateToken} from "./middlewares/index.js"
+import { loginRouter, registerRouter, postRouter, feedBackRouter, eventRouter, userRouter , chatRouter , warehouseRouter , marketPlaceRouter} from "./routers/index.js";
+import { authenticateToken } from "./middlewares/index.js"; 
+import { proposal, chats, document } from "./webSockets/index.js";
+import salesRouter from "./routers/khaataRouter/salesRouter.js";
+import transactionRouter from "./routers/khaataRouter/transactionRouter.js";
 
-const PORT = process.env.PORT;
+const corsOptions = {
+  origin: ["*", process.env.FRONTEND_URL, "http://192.168.118.236:5173"],
+  methods: "POST, GET , PATCH",
+  credentials: true,
+};
+
 const app = express();
+const PORT = process.env.PORT;
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: corsOptions,
+});
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(morgan("dev"));
 
 connectDB();
 
-app.use(bodyParser.json());
-app.use(morgan('dev'));
+app.use("/register", registerRouter);
+app.use("/login", loginRouter);
+app.use("/feedback", feedBackRouter);
 
-/**
- * VVIP Remember to send ID created anywhere to frontend as it will be used
- * to identify things such as posts proposals etc
- */
+app.use('/transactions', transactionRouter);
+app.use('/sales', salesRouter);
 
-app.use('/register', registerRouter);
-app.use('/login',loginRouter)
+app.use(authenticateToken);
 
-// app.use(authenticateToken)
+proposal(io);
+chats(io);
+document(io);
 
-proposal(io)
-chatRoom(io)
 
-app.use('/post',postRouter)
-app.use('/register/inventory',registerInventoryRouter);
-app.use('/register/warehouse',registerWarehouseOwnerRouter);
-app.use('/events',eventRouter)
+app.use("/event", eventRouter);
+app.use("/post", postRouter);
+app.use("/user", userRouter);
+app.use("/warehouse", warehouseRouter);
+app.use('/chat',chatRouter)
+app.use('/marketplace',marketPlaceRouter)
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World</h1>');
+app.get("/", (req, res) => {
+  res.send("<h1>Hello World</h1>");
 });
 
-
-app.listen(PORT, () => {
-    logger.info(`Server is running on port ${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  logger.info(`Server is running on port ${PORT}`);
 });

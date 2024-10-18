@@ -1,8 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
+// import React from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
+
+  // get the saved theme from local storage
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'dark';

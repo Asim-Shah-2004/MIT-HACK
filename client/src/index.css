@@ -1,6 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent; /* Optional: for better appearance */
+}
+
+/* Hide scrollbar for IE and Edge */
+body {
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
+  scrollbar-width: thin; /* Firefox */
+}
 
 @layer base {
   :root {
@@ -30,7 +40,6 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem
   }
-
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -58,13 +67,90 @@
     --chart-5: 340 75% 55%
   }
 }
-
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
   }
 }
+.khata-book-container {
+  background: url('your-notebook-image-url.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 1200px;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.transaction-form input {
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.transaction-form button {
+  padding: 15px;
+  background-color: #28a745;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.transaction-form button:hover {
+  background-color: #218838;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.add-transaction-btn, .customer-ledger-btn {
+  margin-top: 10px;
+  padding: 15px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-transaction-btn:hover, .customer-ledger-btn:hover {
+  background-color: #0056b3;
+}
+
+

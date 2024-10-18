@@ -1,23 +1,21 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const authenticateToken = (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1]; 
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
+  if (!token) return res.status(401).json({ message: "No token, authorization denied" });
 
-  if (!token) {
-    return res.status(401).json({ message: 'Access denied. No token provided.' });
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (decoded.userAgent !== req.headers["user-agent"] || decoded.ip !== req.ip)
+      return res.status(401).json({ message: "Token invalid due to device change" });
+
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(403).json({ message: "Token is not valid" });
   }
-
-  const decoded = jwt.decode(token);
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token.' });
-    }
-    
-    req.user = user; 
-    req.decoded = decoded; 
-    next(); 
-  });
 };
 
 export default authenticateToken;

@@ -1,3 +1,7 @@
-import connectDB from "./DATABASE/connectDB.js"
+import connectDB from "./Database/connectDB.js"
+import sendEventConfirmationEmail from "./communityServices/sendEventConfirmationEmail.js"
 
-export { connectDB }
+export{
+    connectDB,
+    sendEventConfirmationEmail
+}

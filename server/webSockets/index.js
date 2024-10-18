@@ -1,7 +1,9 @@
-import proposal from "./Proposal.js";
-import chatRoom from "./chatWebSockets.js";
+import proposal from "./community/proposal.js";
+import chats from "./chats/chats.js";
+import document from "./chats/document.js";
 
 export{
     proposal,
-    chatRoom
+    chats,
+    document
 }

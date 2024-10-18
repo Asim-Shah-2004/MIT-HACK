@@ -33,8 +33,8 @@ Our project enables entrepreneurs, investors, warehouse owners, and shopkeepers 
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/ManipalHackathon2024/Jonne-youjj-karo.git
-cd Jonne-youjj-karo
+https://github.com/Asim-Shah-2004/MIT-HACK.git
+cd MIT-HACK
 ```
 
 ---

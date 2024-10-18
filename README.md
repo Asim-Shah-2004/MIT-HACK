@@ -24,14 +24,6 @@ Our project enables entrepreneurs, investors, warehouse owners, and shopkeepers 
 - **Event Management**: Host public/private events with automated e-ticket confirmations.
 
 ---
-
-## 🟢 Access
-
-🌐 **Website link**: [Click here to access the platform](https://jonne.vercel.app/)
-
----
-
-
 #
 ## ⚙️ Instructions For Local Deployment Without Docker
 

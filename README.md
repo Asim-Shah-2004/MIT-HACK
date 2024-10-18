@@ -1,7 +1,5 @@
 # Manipal Hackathon 2024 README
 
-**Team Name:** Jonne Youjj Karo
-
 **Problem Statement:**  
 Small and medium-sized enterprises (SMEs) often struggle with limited access to essential resources, hindering their ability to explore new markets, secure funding, develop business skills, and build networks. Design a comprehensive online platform aimed at empowering SMEs by addressing these limitations. The platform should include features such as networking and collaboration tools, a focus on supporting rural businesses, a business directory with advanced search and filtering options, project management and collaboration capabilities, and a user management system with secure login and access controls. Additionally, incorporate a dedicated portal for interaction between SMEs, entrepreneurs, and investors to foster connections and drive economic growth.
 
